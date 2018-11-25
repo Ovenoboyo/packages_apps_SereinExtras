@@ -41,10 +41,10 @@
         android:title="@string/bottom_nav_actions_title"
         app:showAsAction="ifRoom|withText"/>
 
-    <item
+<!--    <item
         android:id="@+id/multitasking"
         android:icon="@drawable/bottomnav_multitasking"
         android:title="@string/bottom_nav_multitasking_title"
-        app:showAsAction="ifRoom|withText"/>
+        app:showAsAction="ifRoom|withText"/> -->
 
 </menu>

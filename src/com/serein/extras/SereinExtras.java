@@ -82,9 +82,9 @@ public class SereinExtras extends SettingsPreferenceFragment {
                     case R.id.navigation:
                         viewPager.setCurrentItem(3);
                         return true;
-                    case R.id.multitasking:
-                        viewPager.setCurrentItem(4);
-                        return true;
+                    //case R.id.multitasking:
+                        //viewPager.setCurrentItem(4);
+                        //return true;
                 }
                 return false;
             }
@@ -127,7 +127,7 @@ public class SereinExtras extends SettingsPreferenceFragment {
             frags[1] = new Lockscreen();
             frags[2] = new Statusbar();
             frags[3] = new Actions();
-            frags[4] = new Multitasking();
+            //frags[4] = new Multitasking();
         }
 
         @Override
@@ -152,8 +152,8 @@ public class SereinExtras extends SettingsPreferenceFragment {
                 getString(R.string.bottom_nav_system_title),
                 getString(R.string.bottom_nav_lockscreen_title),
                 getString(R.string.bottom_nav_statusbar_title),
-                getString(R.string.bottom_nav_actions_title),
-                getString(R.string.bottom_nav_multitasking_title)};
+                getString(R.string.bottom_nav_actions_title)};
+                //getString(R.string.bottom_nav_multitasking_title)};
 
         return titleString;
     }
