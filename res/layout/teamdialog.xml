@@ -78,7 +78,7 @@
                                 app:civ_border="true"
                                 app:civ_border_width="3dp" />
                              <TextView
-                                android:id="@+id/dark_text"
+                                android:id="@+id/nikhil_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Nikhil"
@@ -310,7 +310,7 @@
                                 app:civ_border="true"
                                 app:civ_border_width="3dp" />
                              <TextView
-                                android:id="@+id/dark_text"
+                                android:id="@+id/rasheed_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Rasheed"
@@ -339,7 +339,7 @@
                                 app:civ_border="true"
                                 app:civ_border_width="3dp" />
                              <TextView
-                                android:id="@+id/dark_text"
+                                android:id="@+id/sushant_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Sushant"
@@ -367,7 +367,7 @@
                                 app:civ_border="true"
                                 app:civ_border_width="3dp" />
                              <TextView
-                                android:id="@+id/dark_text"
+                                android:id="@+id/pranavaryans_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Pranavaryans"
