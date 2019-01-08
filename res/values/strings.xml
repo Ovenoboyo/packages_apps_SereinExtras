@@ -17,9 +17,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- The Team -->
+	<string name="dialog_maintainer_title">Maintainers</string>
     <string name="dialog_team_title">The Heart of Serein</string>
     <string name="myron">Myron Viegas</string>
-    <string name="myron_desc">Lead Developer</string>
+    <string name="myron_desc">Ex-Developer</string>
     <string name="oveno">Sahil Gupte</string>
     <string name="oveno_desc">Lead Developer</string>
     <string name="amulya">Amulya Bhardwaj</string>

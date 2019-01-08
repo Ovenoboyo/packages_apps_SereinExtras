@@ -239,6 +239,99 @@ public class TeamFragment extends DialogFragment {
                 }
            });
         }
+		
+        FrameLayout rasheed = null;
+        if (view != null) {
+            rasheed = view.findViewById(R.id.rasheed);
+        }
+        if (rasheed != null) {
+            rasheed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                    View view1 = null;
+                    LayoutInflater inflater1 = (LayoutInflater) getContext()
+                            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                    if (inflater != null) {
+                        view1 = inflater1.inflate(R.layout.teaminfo_rasheed, nullParent);
+                    }
+
+                    alert.setView(view1);
+                    alert.setCancelable(true);
+                    AlertDialog alertdialog = alert.create();
+                    alertdialog.show();
+
+                    LinearLayout rasheed_img = null;
+                    if (view1 != null) {
+                        rasheed_img = view1.findViewById(R.id.rasheed_img);
+                        setTeamMember("RasheedSahaji", rasheed_img);
+                    }
+                }
+           });
+        }
+		
+        FrameLayout sushant = null;
+        if (view != null) {
+            sushant = view.findViewById(R.id.sushant);
+        }
+        if (sushant != null) {
+            sushant.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                    View view1 = null;
+                    LayoutInflater inflater1 = (LayoutInflater) getContext()
+                            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                    if (inflater != null) {
+                        view1 = inflater1.inflate(R.layout.teaminfo_sushant, nullParent);
+                    }
+
+                    alert.setView(view1);
+                    alert.setCancelable(true);
+                    AlertDialog alertdialog = alert.create();
+                    alertdialog.show();
+
+                    LinearLayout rasheed_img = null;
+                    if (view1 != null) {
+                        rasheed_img = view1.findViewById(R.id.sushant_img);
+                        setTeamMember("Erlichbachman_Eh", sushant_img);
+                    }
+                }
+           });
+        }
+		
+        FrameLayout pranavaryans = null;
+        if (view != null) {
+            pranavaryans = view.findViewById(R.id.pranavaryans);
+        }
+        if (pranavaryans != null) {
+            pranavaryans.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+                    View view1 = null;
+                    LayoutInflater inflater1 = (LayoutInflater) getContext()
+                            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                    if (inflater != null) {
+                        view1 = inflater1.inflate(R.layout.teaminfo_pranavaryans, nullParent);
+                    }
+
+                    alert.setView(view1);
+                    alert.setCancelable(true);
+                    AlertDialog alertdialog = alert.create();
+                    alertdialog.show();
+
+                    LinearLayout pranavaryans_img = null;
+                    if (view1 != null) {
+                        pranavaryans_img = view1.findViewById(R.id.sushant_img);
+                        setTeamMember("Erlichbachman_Eh", pranavaryans_img);
+                    }
+                }
+           });
+        }
         dialog.show();
 
         return dialog;
