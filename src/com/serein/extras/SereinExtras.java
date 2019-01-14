@@ -43,73 +43,53 @@ import com.serein.extras.tabs.Actions;
 import com.serein.extras.tabs.Statusbar;
 import com.serein.extras.tabs.System;
 
+import com.serein.extras.viewpager.*
+
 public class SereinExtras extends SettingsPreferenceFragment {
 
     public SereinExtras() {
     }
 
-    MenuItem menuitem;
+    int baseElevation = 1;
+    int raisingElevation = 1;
+    float smallerScale = 1;
 
-    PagerAdapter mPagerAdapter;
+    int viewPagerPadding = 1;
+
+    Point screen = new Point();
+
+    float startOffset = (float)(viewPagerPadding)/(float)(screen.x - 2*viewPagerPadding);
+    private ViewPager mViewPager;
+    private ViewPagerAdapter mViewPagerAdapter;
+    private ArrayList<ViewPagerContainer> mContents;
+	
+    MenuItem menuitem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.sereinextras, container, false);
 
-        final BottomNavigationViewCustom navigation = view.findViewById(R.id.navigation);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        mContents = new ArrayList<>();
 
-        final ViewPager viewPager = view.findViewById(R.id.viewpager);
+        int bg[] = {R.drawable.one, R.drawable.two, R.drawable.three};
+        String cat[] = {"Statusbar", "Recents", "System"};
 
-        navigation.setBackground(new ColorDrawable(getResources().getColor(R.color.BottomBarBackgroundColor)));
+        for (int i = 0; i < bg.length; i++) {
+            ViewPagerContainer viewpagercontainer = new ViewPagerContainer();
 
-        mPagerAdapter = new PagerAdapter(getFragmentManager());
-        viewPager.setAdapter(mPagerAdapter);
+            viewpagercontainer.bg = bg[i];
+            viewpagercontainer.cat = cat[i];
 
-        navigation.setOnNavigationItemSelectedListener(new BottomNavigationViewCustom.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.system:
-                        viewPager.setCurrentItem(0);
-                        return true;
-                    case R.id.lockscreen:
-                        viewPager.setCurrentItem(1);
-                        return true;
-                    case R.id.statusbar:
-                        viewPager.setCurrentItem(2);
-                        return true;
-                    case R.id.navigation:
-                        viewPager.setCurrentItem(3);
-                        return true;
-                    //case R.id.multitasking:
-                        //viewPager.setCurrentItem(4);
-                        //return true;
-                }
-                return false;
-            }
-        });
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            mContents.add(viewpagercontainer);
+        }
 
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                if(menuitem != null) {
-                    menuitem.setChecked(false);
-                } else {
-                    navigation.getMenu().getItem(0).setChecked(false);
-                }
-                navigation.getMenu().getItem(position).setChecked(true);
-                menuitem = navigation.getMenu().getItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
+        mViewPagerAdapter = new ViewPagerAdapter(mContents, this);
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setPageTransformer(true, new CardsPagerTransformerShift(baseElevation, raisingElevation, smallerScale, startOffset));
+        mViewPager.setAdapter(mViewPagerAdapter);
+		
 
         setHasOptionsMenu(true);
 
@@ -118,9 +98,14 @@ public class SereinExtras extends SettingsPreferenceFragment {
 
     class PagerAdapter extends FragmentPagerAdapter {
 
-        String titles[] = getTitles();
-        private Fragment frags[] = new Fragment[titles.length];
+        private List<ViewPagerContainer> contents;
+        private Context mContext;
 
+        public ViewPagerAdapter(List<ViewPagerContainer> contents, Context mContext) {
+            this.contents = contents;
+            this.mContext = mContext;
+        }
+		
         public PagerAdapter(FragmentManager fm) {
             super(fm);
             frags[0] = new System();
@@ -129,7 +114,7 @@ public class SereinExtras extends SettingsPreferenceFragment {
             frags[3] = new Actions();
             //frags[4] = new Multitasking();
         }
-
+		
         @Override
         public Fragment getItem(int position) {
             return frags[position];
@@ -137,27 +122,40 @@ public class SereinExtras extends SettingsPreferenceFragment {
 
         @Override
         public int getCount() {
-            return frags.length;
+            return contents.size();
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
+        public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+            return view == (CardView)o;
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View view = inflater.inflate(R.layout.pager_contents, container, false);
+
+            container.addView(view);
+
+            ImageView imageview = (ImageView)view.findViewById(R.id.bg);
+            imageview.setImageResource((contents.get(position).getBg()));
+
+            TextView cat = (TextView) view.findViewById(R.id.category);
+            cat.setText(contents.get(position).getCat());
+
+            return view;
+        }
+
+        @Override
+        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+            super.destroyItem(container, position, object);
+
+            container.removeView((View)object);
         }
     }
-
-    private String[] getTitles() {
-        String titleString[];
-        titleString = new String[]{
-                getString(R.string.bottom_nav_system_title),
-                getString(R.string.bottom_nav_lockscreen_title),
-                getString(R.string.bottom_nav_statusbar_title),
-                getString(R.string.bottom_nav_actions_title)};
-                //getString(R.string.bottom_nav_multitasking_title)};
-
-        return titleString;
-    }
-
+	
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SEREINEXTRAS;
